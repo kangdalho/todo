@@ -36,7 +36,7 @@ public class ScheduleController {
 
         List<ScheduleResponseDto> scheduleList = scheduleService.findAll();
 
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_FIND_OK,scheduleList));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_FIND_SUCCESS,scheduleList));
     }
 
     @GetMapping("/{scheduleId}")
@@ -45,7 +45,7 @@ public class ScheduleController {
     ) {
         ScheduleResponseDto findSchedule = scheduleService.findById(scheduleId);
 
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_FIND_OK,findSchedule));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_FIND_SUCCESS,findSchedule));
 
     }
 
@@ -56,7 +56,7 @@ public class ScheduleController {
     ) {
         ScheduleResponseDto updated = scheduleService.update(scheduleId,requestDto.getTitle(), requestDto.getContent());
 
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_UPDATE_OK,updated));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_UPDATE_SUCCESS,updated));
     }
 
     @DeleteMapping("/{scheduleId}")
@@ -64,7 +64,7 @@ public class ScheduleController {
             @PathVariable Long scheduleId
     ) {
         scheduleService.delete(scheduleId);
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_DELETE_OK,null));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_DELETE_SUCCESS,null));
     }
 
 }

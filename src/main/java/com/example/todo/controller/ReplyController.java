@@ -9,7 +9,6 @@ import com.example.todo.dto.response.CommentWithRepliesDto;
 import com.example.todo.dto.response.ReplyResponseDto;
 import com.example.todo.service.ReplyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,24 +34,24 @@ public class ReplyController {
     ) {
         CommentWithRepliesDto findReply = replyService.findById(commentId);
 
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.REPLY_FIND_OK, findReply));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.REPLY_FIND_SUCCESS, findReply));
     }
 
     @PatchMapping("/replies/{replyId}")
-    public ResponseEntity<ReplyResponseDto> updateReply(
+    public ResponseEntity<ApiResponseDto<ReplyResponseDto>> updateReply(
             @PathVariable Long replyId,
             @RequestBody UpdateReplyRequestDto requestDto
     ) {
         ReplyResponseDto updatedReply = replyService.updateReply(replyId, requestDto.getContent());
-        return new ResponseEntity<>(updatedReply,HttpStatus.OK);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.REPLY_UPDATE_SUCCESS,updatedReply));
     }
 
     @DeleteMapping("/replies/{replyId}")
-    public ResponseEntity<Void> deleteReply(
+    public ResponseEntity<ApiResponseDto<Void>> deleteReply(
             @PathVariable Long replyId
     ) {
         replyService.deleteReply(replyId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.REPLY_DELETE_SUCCESS,null));
     }
 
 

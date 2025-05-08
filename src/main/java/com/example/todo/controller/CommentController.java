@@ -32,7 +32,7 @@ public class CommentController {
             @PathVariable Long commentId
     ) {
         CommentResponseDto findComment = commentService.findById(commentId);
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.COMMENT_FIND_OK,findComment));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.COMMENT_FIND_SUCCESS,findComment));
     }
 
     @PatchMapping("/comments/{commentId}")
@@ -41,7 +41,7 @@ public class CommentController {
             @RequestBody UpdateCommentRequestDto requestDto
     ) {
        CommentResponseDto responseDto = commentService.updateComment(commentId,requestDto.getContent());
-       return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.COMMENT_UPDATE_OK,responseDto));
+       return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.COMMENT_UPDATE_SUCCESS,responseDto));
     }
 
     @DeleteMapping("/comments/{commentId}")
@@ -49,6 +49,6 @@ public class CommentController {
             @PathVariable Long commentId
     ) {
         commentService.delete(commentId);
-        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.COMMENT_DELETE_OK,null));
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.COMMENT_DELETE_SUCCESS,null));
     }
 }
