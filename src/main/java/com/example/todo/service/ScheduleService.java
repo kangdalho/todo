@@ -42,6 +42,7 @@ public class ScheduleService {
             throw new RuntimeException("일정이 존재하지 않습니다");
         }
         return schedules;
+
     }
     //일정 단건 조회
     public ScheduleResponseDto findById(Long scheduleId) {

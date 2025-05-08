@@ -58,7 +58,7 @@ public class ScheduleResponseDto {
     // Schedule 객체와 댓글 목록을 받아서 ScheduleResponseDto 객체로 변환하여 반환
     // 댓글 목록은 실제 댓글을 포함하여 반환 (일정 상세 조회)
     public static ScheduleResponseDto toDto(Schedule schedule, List<Comment> commentList) {
-       List<CommentResponseDto> commentDtos = commentList.stream()
+       List<CommentResponseDto> commentListDto = commentList.stream()
                 .map(comment -> new CommentResponseDto(
                         comment.getId(),
                         comment.getWriterId(),
@@ -71,7 +71,7 @@ public class ScheduleResponseDto {
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getCommentCount(),
-                commentDtos); // 댓글 목록 포함하여 반환
+                commentListDto); // 댓글 목록 포함하여 반환
     }
 
 }

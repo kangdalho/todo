@@ -32,15 +32,18 @@ public class Schedule extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
     // 일정 수정 메서드
     public void update(String newTitle, String newContent) {
         this.title = newTitle;
         this.content = newContent;
     }
+
     // 댓글 수 증가 메서드
     public void increaseCommentCount() {
         this.commentCount++;
     }
+
     // 댓글 수 감소 메서드
     public void decreaseCommentCount() {
         if (this.commentCount > 0) {

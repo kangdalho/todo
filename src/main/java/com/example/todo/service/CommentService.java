@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -35,6 +34,7 @@ public class CommentService {
         return new CommentResponseDto(saved.getId(), saved.getWriterId(), saved.getContent());
 
     }
+
     //댓글 단건 조회
     public CommentResponseDto findById(Long commentId) {
 
@@ -42,6 +42,7 @@ public class CommentService {
 
         return new CommentResponseDto(comment.getId(), comment.getWriterId(), comment.getContent());
     }
+
     //댓글 수정
     @Transactional
     public CommentResponseDto updateComment(Long commentId, String content) {
@@ -52,16 +53,17 @@ public class CommentService {
 
         return new CommentResponseDto(comment.getId(), comment.getWriterId(), comment.getContent());
     }
+
     //댓글 삭제
     public void delete(Long commentId) {
-       Comment comment = commentRepository.findByIdOrElseThrow(commentId);
+        Comment comment = commentRepository.findByIdOrElseThrow(commentId);
 
-       Schedule schedule = comment.getSchedule();
+        Schedule schedule = comment.getSchedule();
 
-       commentRepository.delete(comment);
+        commentRepository.delete(comment);
 
-       schedule.decreaseCommentCount();
+        schedule.decreaseCommentCount();
 
-       scheduleRepository.save(schedule);
+        scheduleRepository.save(schedule);
     }
 }

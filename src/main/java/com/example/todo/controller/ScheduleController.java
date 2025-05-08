@@ -1,12 +1,13 @@
 package com.example.todo.controller;
 
 
+import com.example.todo.common.ApiResponseDto;
+import com.example.todo.common.SuccessCode;
 import com.example.todo.dto.request.CreateScheduleRequestDto;
 import com.example.todo.dto.response.ScheduleResponseDto;
 import com.example.todo.dto.request.UpdateScheduleRequestDto;
 import com.example.todo.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,50 +21,50 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> create(
+    public ResponseEntity<ApiResponseDto<ScheduleResponseDto>> create(
             @RequestBody CreateScheduleRequestDto requestDto
     ) {
         ScheduleResponseDto scheduleResponseDto = scheduleService.create(
                 requestDto.getWriterId(), requestDto.getTitle(), requestDto.getContent()
         );
-        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_CREATE_SUCCESS,scheduleResponseDto));
 
     }
 
     @GetMapping
-    public ResponseEntity<List<ScheduleResponseDto>> findAll() {
+    public ResponseEntity<ApiResponseDto<List<ScheduleResponseDto>>> findAll() {
 
         List<ScheduleResponseDto> scheduleList = scheduleService.findAll();
 
-        return new ResponseEntity<>(scheduleList, HttpStatus.OK);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_FIND_OK,scheduleList));
     }
 
     @GetMapping("/{scheduleId}")
-    public ResponseEntity<ScheduleResponseDto> findById(
+    public ResponseEntity<ApiResponseDto<ScheduleResponseDto>> findById(
             @PathVariable Long scheduleId
     ) {
         ScheduleResponseDto findSchedule = scheduleService.findById(scheduleId);
 
-        return new ResponseEntity<>(findSchedule, HttpStatus.OK);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_FIND_OK,findSchedule));
 
     }
 
     @PatchMapping("/{scheduleId}")
-    public ResponseEntity<ScheduleResponseDto> update(
+    public ResponseEntity<ApiResponseDto<ScheduleResponseDto>> update(
             @PathVariable Long scheduleId,
             @RequestBody UpdateScheduleRequestDto requestDto
     ) {
         ScheduleResponseDto updated = scheduleService.update(scheduleId,requestDto.getTitle(), requestDto.getContent());
 
-        return new ResponseEntity<>(updated,HttpStatus.OK);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_UPDATE_OK,updated));
     }
 
     @DeleteMapping("/{scheduleId}")
-    public ResponseEntity<Void> delete(
+    public ResponseEntity<ApiResponseDto<Void>> delete(
             @PathVariable Long scheduleId
     ) {
         scheduleService.delete(scheduleId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.SCHEDULE_DELETE_OK,null));
     }
 
 }
