@@ -4,10 +4,12 @@ package com.example.todo.controller;
 import com.example.todo.common.ApiResponseDto;
 import com.example.todo.common.SuccessCode;
 import com.example.todo.dto.request.CreateCommentRequestDto;
+import com.example.todo.dto.request.UpdateReplyRequestDto;
 import com.example.todo.dto.response.CommentWithRepliesDto;
 import com.example.todo.dto.response.ReplyResponseDto;
 import com.example.todo.service.ReplyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,4 +37,23 @@ public class ReplyController {
 
         return ResponseEntity.ok(ApiResponseDto.success(SuccessCode.REPLY_FIND_OK, findReply));
     }
+
+    @PatchMapping("/replies/{replyId}")
+    public ResponseEntity<ReplyResponseDto> updateReply(
+            @PathVariable Long replyId,
+            @RequestBody UpdateReplyRequestDto requestDto
+    ) {
+        ReplyResponseDto updatedReply = replyService.updateReply(replyId, requestDto.getContent());
+        return new ResponseEntity<>(updatedReply,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/replies/{replyId}")
+    public ResponseEntity<Void> deleteReply(
+            @PathVariable Long replyId
+    ) {
+        replyService.deleteReply(replyId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
