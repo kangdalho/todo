@@ -36,3 +36,29 @@ com.example.todo
 
 ## ERD
 📌 https://www.erdcloud.com/d/YLhoW5FwcRDtgPyLf
+
+## API 동작 이미지
+
+
+1. 일정생성
+![일정생성](https://github.com/user-attachments/assets/dd47862f-cdcb-4f25-9f88-7c12fefc5821)
+
+2. 댓글생성
+![댓글생성](https://github.com/user-attachments/assets/6fbd4ce5-65b0-4529-bbb3-4b3d89ee71db)
+
+3. 대댓글생성
+![대댓글생성](https://github.com/user-attachments/assets/84bce96e-4267-4c5e-a943-57c2948bcf95)
+
+4. 일정조회
+![일정조회](https://github.com/user-attachments/assets/239f43cc-7b8d-4d1d-95b5-02124a14af68)
+
+5. 대댓글조회
+![대댓글조회](https://github.com/user-attachments/assets/7dc1bb16-e109-4821-bf92-2aa8576c54eb)
+
+
+
+
+
+
+
+
